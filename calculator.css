@@ -1,0 +1,90 @@
+* {
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   font: 500 1.1em sans-serif;
+   background-color: mintcream;
+   color: darkslategray;
+}
+
+h1, h2 {
+   font: 500 sans-serif;
+}
+
+h1 {
+   font-size: 1.5em;
+}
+
+.wrapper {
+   margin: 0 auto;
+   text-align: center;
+}
+
+#calculator {
+   width: 330px;
+   height: auto;
+   background-color: blanchedalmond;
+   border: 1px solid gray;
+   padding: 2px;
+   text-align: center;
+   margin: 0 auto;
+}
+
+#calBtn {
+   background-color: inherit;
+}
+
+#calBtn span {
+   display: inline-block;
+   background-color: lightgray;
+   width: 60px;
+   height: 60px;
+   line-height: 50px;
+   text-align: center;
+   vertical-align: middle;
+   margin: 5px;
+   cursor: pointer;
+   outline: none;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+#calBtn span:hover {
+   -webkit-box-shadow: none;
+   box-shadow: none;
+   border: 0.5px solid gray;
+}
+
+.screen {
+   width: 95%;
+   height: auto;
+   border: 0.5px solid gray;
+   margin: 15px auto 10px auto;
+}
+
+#calculator,
+#calBtn span,
+.screen {
+   -webkit-box-shadow: 1px 1px 2px darkslateblue;
+   box-shadow: 1px 1px 2px darkslateblue;
+   border-radius: 5px;
+}
+
+#equation,
+#display {
+   display: block;
+   width: 93%;
+   height: 40px;
+   line-height: 40px;
+   margin: 0 auto;
+   text-align: right;
+   padding: 1px 0;
+}
+
+@media only screen and (max-width: 768px) {
+   #calBtn span {
+      height: 71px;
+      line-height: 71px;
+   }
+}
