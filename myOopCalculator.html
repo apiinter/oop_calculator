@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style>
+      * {
+         -webkit-box-sizing: border-box;
+         box-sizing: border-box;
+         font: 500 1.1em sans-serif;
+         background-color: mintcream;
+         color: darkslategray;
+      }
+
+      h1,
+      h2 {
+         font: 500 sans-serif;
+      }
+
+      h1 {
+         font-size: 1.5em;
+      }
+
+      .wrapper {
+         margin: 0 auto;
+         text-align: center;
+      }
+
+      #calculator {
+         width: 430px;
+         height: auto;
+         background-color: skyblue;
+         border: 1px solid gray;
+         padding: 2px;
+         text-align: center;
+         margin: 0 auto;
+      }
+
+      #calBtn {
+         background-color: inherit;
+      }
+
+      #calBtn span {
+         display: inline-block;
+         background-color: white;
+         width: 60px;
+         height: 60px;
+         line-height: 50px;
+         text-align: center;
+         vertical-align: middle;
+         margin: 5px;
+         cursor: pointer;
+         outline: none;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+      }
+
+      #calBtn span:hover {
+         -webkit-box-shadow: none;
+         box-shadow: none;
+         border: 0.5px solid gray;
+      }
+
+      .screen {
+         width: 95%;
+         height: 80px;
+         border: 0.5px solid gray;
+         margin: 15px auto 10px auto;
+      }
+
+      #calculator,
+      #calBtn span,
+      .screen {
+         -webkit-box-shadow: 1px 1px 2px darkslateblue;
+         box-shadow: 1px 1px 2px darkslateblue;
+         border-radius: 5px;
+
+      }
+
+      #display {
+         display: block;
+         width: 99%;
+         height: 97%;
+         margin: 2px auto;
+         text-align: right;
+         padding: 1px 0;
+         overflow-y: auto;
+         -ms-overflow-style: hide;
+         overflow-wrap: break-word;
+      }
+
+      @media only screen and (max-width: 768px) {
+         #calBtn span {
+            height: 71px;
+            line-height: 71px;
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <div class="wrapper">
+      <div id="calculator">
+         <div class="screen">
+            <span id="display"></span>
+         </div>
+         <div id="calBtn">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <br>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>0</span>
+            <br>
+            <span>+</span>
+            <span>-</span>
+            <span>×</span>
+            <span>÷</span>
+            <span>=</span>
+            <br>
+            <span>(</span>
+            <span>)</span>
+            <span>←</span>
+            <span>C</span>
+            <span>H</span>
+
+         </div>
+      </div>
+   </div>
+   <script>
+      function Calculator() {
+         var display = document.getElementById("display");
+         var op = ["+", "-", "×", "÷"];
+         var result = "";
+         var history = [];
+         this.input = function (e) {
+            var input = e.target.textContent;
+            if (input === "=" && display.innerHTML !== "" && !display.innerHTML.includes(":") && !op.includes(display.innerHTML.substr(-1)) && !display.innerHTML.includes("=")) {
+               result = calc.calculate();
+               display.innerHTML += "=" + result;
+               history.push(result);
+            } else if (op.includes(input) && display.innerHTML !== "" && !op.includes(display.innerHTML.substr(-1)) && !display.innerHTML.includes(":")) {
+               if (display.innerHTML.includes("=")) {
+                  display.innerHTML = result;
+               }
+               display.innerHTML += input;
+            } else if (!isNaN(input) && !display.innerHTML.includes("=") && !display.innerHTML.includes(":")) {
+               display.innerHTML += input;
+            } else if ((input === "(" || input === ")") && !display.innerHTML.includes("=") && !display.innerHTML.includes(":")) {
+               display.innerHTML += input;
+            } else if (input === "C") {
+               calc.clear();
+            } else if (input === "←" && !display.innerHTML.includes("=") && !display.innerHTML.includes(":")) {
+               calc.backspace();
+            }else if(input === "H" && !isNaN(result)){
+               calc.showHistory();
+            }
+         }
+         this.calculate = function () {
+            var arrDisp = display.innerHTML.split("");
+            var convertedDisp = calc.convert(arrDisp);
+            var arrCalc = convertedDisp.join();
+            var forCalc = arrCalc.replace(/,/g, "");
+            return eval(forCalc);
+         }
+         this.convert = function (s) {
+            for (var i = 0; i < s.length; i++) {
+               if (s[i] == '×') s[i] = '*';
+               if (s[i] == '÷') s[i] = '/';
+            }
+            return s;
+         }
+         this.backspace = function () {
+            display.innerHTML = display.innerHTML.slice(0, -1);
+         }
+         this.clear = function () {
+            display.innerHTML = "";
+         }
+         this.showHistory = function(){
+            display.innerHTML = "";
+            for(var i in history){
+               display.innerHTML += Number(i)+1+"번째 결과: " + history[i] + "<br>";
+            }
+         }
+      }
+      var calc = new Calculator();
+      var nodes = document.getElementById("calBtn").childNodes;   // calBtn의 childNodes를 nodes 배열에 대입
+      for (var i = 0; i < nodes.length; i++) {  // calBtn의 모든 버튼에 addEventListener 설정
+         if (nodes[i].nodeName.toLowerCase() === "span") {
+            nodes[i].addEventListener("click", calc.input)
+         }
+      }
+   </script>
+</body>
+</html>

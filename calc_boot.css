@@ -1,0 +1,30 @@
+
+.calc-title, .calc-sub-title {
+   font-family: 'Ubuntu Mono', sans-serif;
+   font-size: 20pt;
+   text-align: center;
+ }
+ 
+ .calc-sub-title {
+   font-size: 8pt;
+ }
+ 
+ #outer-container {
+   background-color: rgba(115, 220, 176, 0.33); 
+   max-width: 240px;
+   padding-bottom: 20px;
+ }
+ 
+ #inner-container {
+   max-width:200px;
+ }
+ 
+ #inputOutput {
+   text-align: right;
+   margin-top: 10px;
+ }
+ 
+ .btn:focus,.btn:active:focus,.btn.active:focus,
+ .btn.focus,.btn:active.focus,.btn.active.focus {
+     outline: none;
+ }
